@@ -27,4 +27,8 @@ L.sh checks a strings file to see whether it contains all the keys defined in yo
 # ... and so on.
 ```
 
-If you forget to include a key in one of your strings files, your build will now fail.
+If you're using CocoaPods, then the path to L.sh is ``.
+
+Once you've added the build phase, if you forget to include a key in one of your strings files, your build will fail.  Make sure you add the phase to every target that you want to check!
+
+
