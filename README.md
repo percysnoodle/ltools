@@ -22,12 +22,12 @@ L.sh
 L.sh checks a strings file to see whether it contains all the keys defined in your app.  To use it, add a "Run Script" build phase to your target which calls L.sh for each of your strings files:
 
 ```sh
-(! sh path/to/L.sh "My App/en.lproj/Localizable.strings" | grep -E '^-"') &&
-(! sh path/to/L.sh "My App/pt.lproj/Localizable.strings" | grep -E '^-"')
+sh path/to/L.sh "My App/en.lproj/Localizable.strings" &&
+sh path/to/L.sh "My App/pt.lproj/Localizable.strings"
 # ... and so on.
 ```
 
-If you're using CocoaPods, then the path to L.sh is ``.
+If you're using CocoaPods, then the path to L.sh is ``.  L.sh uses `ack` internally, so you'll need to install that first.  If you're using homebrew, you can do this with `brew install ack`.
 
 Once you've added the build phase, if you forget to include a key in one of your strings files, your build will fail.  Make sure you add the phase to every target that you want to check!
 
