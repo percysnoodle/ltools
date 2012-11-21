@@ -27,7 +27,7 @@ sh path/to/L.sh "My App/pt.lproj/Localizable.strings"
 # ... and so on.
 ```
 
-If you're using CocoaPods, then the path to L.sh is `Pods/ltools/bin/L.sh`.  L.sh uses `ack` internally, so you'll need to install that first.  If you're using homebrew, you can do this with `brew install ack`.
+If you're using [CocoaPods](http://cocoapods.org), then the path to L.sh is `Pods/ltools/bin/L.sh`.  L.sh uses `ack` internally, so you'll need to install that first.  If you're using homebrew, you can do this with `brew install ack`.
 
 Once you've added the build phase, if you forget to include a key in one of your strings files, your build will fail.  Make sure you add the phase to every target that you want to check!
 
