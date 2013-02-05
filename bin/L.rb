@@ -6,8 +6,10 @@ require 'ruby-debug'
 def find_files group, path, regex
   files = []
 
-  group_path = group.path.to_s.sub /^\//, ''
-  p = File.join(path, group_path)
+  group_path = case group.source_tree
+    when '<group>' then File.join(path, group.path.to_s)
+    else group.path.to_s
+  end
 
   group.children.each do |child|
     case child
@@ -16,17 +18,17 @@ def find_files group, path, regex
         if child.name.match regex
           lprojs = child.children.map {|c| c.name + '.lproj'}
           lprojs.each do |l|
-            files << File.join(p, l, child.name)
+            files << File.join(group_path, l, child.name)
           end
         end
 
       when Xcodeproj::Project::Object::PBXGroup
-        group_files = find_files(child, p, regex)
+        group_files = find_files(child, group_path, regex)
         files.concat group_files
   
       when Xcodeproj::Project::Object::PBXFileReference
         if child.path.match regex
-          files << File.join(p, child.path)
+          files << File.join(group_path, child.path)
         end
 
     end
