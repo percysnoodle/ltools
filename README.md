@@ -1,7 +1,7 @@
 ltools
 ======
 
-ltools is a collection of tools which help to localise an iOS app.  At the moment, it consists of a header file with some macros, and a shell script which will check whether the strings that the app uses actually exist.
+ltools is a collection of tools which help to localise an iOS app.  At the moment, it consists of a header file with some macros, and a ruby script which will check whether the strings that the app uses actually exist.
 
 L.h
 ---
@@ -16,18 +16,18 @@ NSURL *myURL = LU(@"myURLKey"); // equivalent to [NSURL URLWithString:NSLocalize
 
 There are two advanteges to this: first, it is slightly quicker to type `L` than it is to type `NSLocalizedString`; and secondly it allows you to use L.sh.
 
-L.sh
+L.rb
 ----
 
-L.sh checks a strings file to see whether it contains all the keys defined in your app.  To use it, add a "Run Script" build phase to your target which calls L.sh for each of your strings files:
+L.rb checks a strings file to see whether it contains all the keys defined in your app.  To use it, add a "Run Script" build phase to your target which calls L.rb for your project:
 
-```sh
-sh path/to/L.sh "My App/en.lproj/Localizable.strings" &&
-sh path/to/L.sh "My App/pt.lproj/Localizable.strings"
-# ... and so on.
+```ruby
+ruby path/to/L.rb "My App.xcodeproj"
 ```
 
-If you're using [CocoaPods](http://cocoapods.org), then the path to L.sh is `Pods/ltools/bin/L.sh`.  L.sh uses `ack` internally, so you'll need to install that first.  If you're using homebrew, you can do this with `brew install ack`.
+L.rb will inspect your project to find which files are included in a build, and to find where your localisable strings files are.
+
+If you're using [CocoaPods](http://cocoapods.org), then the path to L.rb is `Pods/ltools/bin/L.rb`.  L.rb requires the 'xcodeproj' gem; if you're using cocoapods, then you already have it installed.
 
 Once you've added the build phase, if you forget to include a key in one of your strings files, your build will fail.  Make sure you add the phase to every target that you want to check!
 
