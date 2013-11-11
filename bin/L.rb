@@ -37,7 +37,7 @@ def find_files group, path, regex
   files
 end
 
-proj = Xcodeproj::Project.new ARGV[0]
+proj = Xcodeproj::Project.open ARGV[0]
 
 source_files = find_files proj.root_object.main_group, '.', /\.[hm]$/
 source_file_strings = Set.new
