@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'xcodeproj'
-require 'ruby-debug'
+require 'set'
 
 def find_files group, path, regex
   files = []
